@@ -55,6 +55,8 @@ therein, increment this number.
 #define MAXSIMULATIONS TICRATE //one second of simulations
 #define MAXLOCALSAVESTATES 8
 
+
+extern tic_t liveTic;
 //
 // Packet structure
 //
