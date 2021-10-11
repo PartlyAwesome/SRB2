@@ -2224,6 +2224,8 @@ static void Got_Mapcmd(UINT8 **cp, INT32 playernum)
 		return;
 	}
 
+	InvalidateSavestates();
+
 	if (chmappending)
 		chmappending--;
 
