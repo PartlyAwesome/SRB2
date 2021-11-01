@@ -6205,7 +6205,6 @@ void MakeNetDebugString()
 		}
 	}
 
-	static tic_t lastSim = 0;
 	sprintf(&netDebugText[strlen(netDebugText)], "\n\nCanSimulate: %d", canSimulate);
 	sprintf(&netDebugText[strlen(netDebugText)], "\nJitter: %d", serverJitter);
 	sprintf(&netDebugText[strlen(netDebugText)], "\nRTTJitter: %d", rttJitter);
