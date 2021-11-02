@@ -37,7 +37,6 @@
 
 #include "doomstat.h"
 #include "g_state.h"
-
 #include "hashtable.h"
 
 lua_State *gL = NULL;
@@ -1699,14 +1698,9 @@ void LUA_UnArchive(void)
 	{
 		th = mobjnum_ht_linkedList_Find(mobjnum);
 		if (th && ((mobj_t *)th)->mobjnum == mobjnum)
-		{
-			// hashHits++;
 			UnArchiveExtVars(th);
-		}
 		else
 		{
-			// hashmiss++;
-			
 			for (th = thlist[THINK_MOBJ].next; th != &thlist[THINK_MOBJ]; th = th->next)
 			{
 				if (th->function.acp1 == (actionf_p1)P_RemoveThinkerDelayed)
@@ -1718,7 +1712,8 @@ void LUA_UnArchive(void)
 		}
 		mobjnum = READUINT32(save_p); // read a mobjnum
 	} 
-	
+
+	// "Optimized" old routine w/o hashtables
 	// mobjnum = READUINT32(save_p);
 	// while(mobjnum != UINT32_MAX) // repeat until end of mobjs marker.
 	// {
