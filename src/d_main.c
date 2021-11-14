@@ -95,6 +95,10 @@
 int VERSION;
 int SUBVERSION;
 
+#ifdef HAVE_DISCORDRPC
+#include "discord.h"
+#endif
+
 // platform independant focus loss
 UINT8 window_notinfocus = false;
 
@@ -846,6 +850,12 @@ void D_SRB2Loop(void)
 #endif
 
 		LUA_Step();
+#ifdef HAVE_DISCORDRPC
+		if (! dedicated)
+		{
+			Discord_RunCallbacks();
+		}
+#endif
 	}
 }
 
@@ -1665,6 +1675,12 @@ void D_SRB2Main(void)
 		if (!P_LoadLevel(false, false))
 			I_Quit(); // fail so reset game stuff
 	}
+#ifdef HAVE_DISCORDRPC
+	if (! dedicated)
+	{
+		DRPC_Init();
+	}
+#endif
 }
 
 const char *D_Home(void)
