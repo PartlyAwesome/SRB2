@@ -132,6 +132,7 @@ static boolean cl_redownloadinggamestate = false;
 
 static UINT8 localtextcmd[MAXTEXTCMD];
 static UINT8 localtextcmd2[MAXTEXTCMD]; // splitscreen
+// tic_t neededtic;
 SINT8 servernode = 0; // the number of the server node
 
 /// \brief do we accept new players?
@@ -5528,12 +5529,12 @@ boolean FindMatchingTics(int *liveTicOut, int *gameTicOut);
 void TryRunTics(tic_t realtics, tic_t entertic)
 {
 	// the machine has lagged but it is not so bad
-	if (realtics > TICRATE / 7) // FIXME: consistency failure!!
+	if (realtics > TICRATE/7) // FIXME: consistency failure!!
 	{
 		if (server)
 			realtics = 1;
 		else
-			realtics = TICRATE / 7;
+			realtics = TICRATE/7;
 	}
 
 	if (singletics)
@@ -5674,9 +5675,13 @@ void TryRunTics(tic_t realtics, tic_t entertic)
 				// run the count * tics
 				while (neededtic > gametic)
 				{
+
+					boolean update_stats = !(paused || P_AutoPause());
+					
 					DEBFILE(va("============ Running tic %d (local %d)\n", gametic, localgametic));
 
-					ps_tictime = I_GetPreciseTime();
+					if (update_stats)
+						PS_START_TIMING(ps_tictime);
 
 					// we restore netcmds of players, localplayer will be overwritten anyways during sims
 					if ((liveTic % simInaccuracy == 0) && simInaccuracy > 1)
@@ -5696,7 +5701,11 @@ void TryRunTics(tic_t realtics, tic_t entertic)
 					simtic = gametic;
 					consistancy[gametic % BACKUPTICS] = Consistancy();
 
-					ps_tictime = I_GetPreciseTime() - ps_tictime;
+					if (update_stats)
+					{
+						PS_STOP_TIMING(ps_tictime);
+						PS_UpdateTickStats();
+					}
 
 					if (canSimulate)
 					{
