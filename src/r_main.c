@@ -1181,7 +1181,7 @@ void R_SetupFrame(player_t *player)
 		{
 			if (player == &players[consoleplayer])
 			{
-				viewangle = localangle; // WARNING: camera uses this
+				viewangle = localangle;
 				aimingangle = localaiming;
 			}
 			else if (player == &players[secondarydisplayplayer])

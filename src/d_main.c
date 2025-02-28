@@ -95,10 +95,6 @@
 int VERSION;
 int SUBVERSION;
 
-#ifdef HAVE_DISCORDRPC
-#include "discord.h"
-#endif
-
 // platform independant focus loss
 UINT8 window_notinfocus = false;
 
@@ -726,7 +722,7 @@ void D_SRB2Loop(void)
 	if (dedicated)
 		server = true;
 
-		// Pushing of + parameters is now done back in D_SRB2Main, not here.
+	// Pushing of + parameters is now done back in D_SRB2Main, not here.
 
 #ifdef _WINDOWS
 	CONS_Printf("I_StartupMouse()...\n");
@@ -812,7 +808,6 @@ void D_SRB2Loop(void)
 
 		if (lastdraw || singletics || gametic > rendergametic)
 		{
-
 			rendergametic = gametic;
 			rendertimeout = entertic+TICRATE/17;
 
@@ -851,12 +846,6 @@ void D_SRB2Loop(void)
 #endif
 
 		LUA_Step();
-#ifdef HAVE_DISCORDRPC
-		if (! dedicated)
-		{
-			Discord_RunCallbacks();
-		}
-#endif
 	}
 }
 
@@ -1676,12 +1665,6 @@ void D_SRB2Main(void)
 		if (!P_LoadLevel(false, false))
 			I_Quit(); // fail so reset game stuff
 	}
-#ifdef HAVE_DISCORDRPC
-	if (! dedicated)
-	{
-		DRPC_Init();
-	}
-#endif
 }
 
 const char *D_Home(void)

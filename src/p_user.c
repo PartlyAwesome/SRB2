@@ -3016,8 +3016,6 @@ static void P_CheckInvincibilityTimer(player_t *player)
 	{
 		mobj_t *sparkle = P_SpawnMobj(player->mo->x, player->mo->y, player->mo->z, MT_IVSP);
 		sparkle->destscale = player->mo->scale;
-		if (cv_playerfullbright.value)
-			sparkle->frame |= FF_FULLBRIGHT;
 		P_SetScale(sparkle, player->mo->scale);
 	}
 
@@ -9805,10 +9803,7 @@ boolean P_MoveChaseCamera(player_t *player, camera_t *thiscam, boolean resetcall
 	if (!thiscam->chase && !resetcalled)
 	{
 		if (player == &players[consoleplayer])
-		{
 			focusangle = localangle;
-
-		}
 		else if (player == &players[secondarydisplayplayer])
 			focusangle = localangle2;
 		else
@@ -9922,7 +9917,6 @@ boolean P_MoveChaseCamera(player_t *player, camera_t *thiscam, boolean resetcall
 		focusangle = R_PointToAngle2(thiscam->x, thiscam->y, mo->x, mo->y);
 		if (player == &players[consoleplayer])
 		{
-
 			if (focusangle >= localangle)
 				P_ForceLocalAngle(player, localangle + (abs((signed)(focusangle - localangle))>>5));
 			else

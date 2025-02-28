@@ -1062,34 +1062,6 @@ static void S_StopChannel(INT32 cnum)
 	c->origin = NULL;
 }
 
-
-//
-// S_DetachChannelFromSource
-//
-// Detaches a sound channel from the object it came from, leaving it loose
-//
-// void S_DetachChannelsFromOrigin(void* origin)
-// {
-// 	int i;
-// 	mobj_t* originmobj = (mobj_t*)origin;
-// 	for (i = 0; i < numofchannels; i++)
-// 	{
-// 		if (channels[i].origin == origin)
-// 		{
-// 			// small hack: player-made sounds should stay hearable
-// 			if (originmobj->player != &players[displayplayer])
-// 			{
-// 				channels[i].isdetached = true;
-// 				channels[i].detachedx = originmobj->x;
-// 				channels[i].detachedy = originmobj->y;
-// 				channels[i].detachedz = originmobj->z;
-// 			}
-
-// 			channels[i].origin = NULL;
-// 		}
-// 	}
-// }
-
 //
 // S_CalculateSoundDistance
 //

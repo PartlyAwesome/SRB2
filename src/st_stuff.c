@@ -131,11 +131,6 @@ static patch_t *fnshico;
 
 static boolean facefreed[MAXPLAYERS];
 
-#ifdef HAVE_DISCORDRPC
-// Discord Rich Presence
-static patch_t *envelope;
-#endif
-
 hudinfo_t hudinfo[NUMHUDITEMS] =
 {
 	{  16, 176, V_SNAPTOLEFT|V_SNAPTOBOTTOM}, // HUD_LIVES
@@ -346,11 +341,6 @@ void ST_LoadGraphics(void)
 
 	for (i = 0; i < 7; ++i)
 		ngradeletters[i] = W_CachePatchName(va("GRADE%d", i), PU_HUDGFX);
-
-#ifdef HAVE_DISCORDRPC
-	// Discord Rich Presence
-	envelope = W_CachePatchName("K_REQUES", PU_HUDGFX);
-#endif
 }
 
 // made separate so that skins code can reload custom face graphics

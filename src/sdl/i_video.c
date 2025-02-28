@@ -85,10 +85,6 @@
 #include "ogl_sdl.h"
 #endif
 
-#ifdef HAVE_DISCORDRPC
-#include "../discord.h"
-#endif
-
 // maximum number of windowed modes (see windowedModes[][])
 #define MAXWINMODES (18)
 
@@ -1229,11 +1225,6 @@ void I_FinishUpdate(void)
 
 	if (cv_showping.value && netgame && consoleplayer != serverplayer)
 		SCR_DisplayLocalPing();
-
-#ifdef HAVE_DISCORDRPC
-	if (discordRequestList != NULL)
-		ST_AskToJoinEnvelope();
-#endif
 
 	if (rendermode == render_soft && screens[0])
 	{
