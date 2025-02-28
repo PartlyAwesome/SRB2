@@ -5103,4 +5103,3 @@ static void BaseNumLaps_OnChange(void)
 			CONS_Printf(M_GetText("Number of laps will be changed to %d next round.\n"), cv_basenumlaps.value);
 	}
 }
-

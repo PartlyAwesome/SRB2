@@ -92,7 +92,7 @@
 #include "lua_script.h"
 
 // Version numbers for netplay :upside_down_face:
-int VERSION;
+int    VERSION;
 int SUBVERSION;
 
 // platform independant focus loss
