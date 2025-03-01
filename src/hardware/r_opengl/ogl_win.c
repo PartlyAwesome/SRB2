@@ -459,7 +459,9 @@ EXPORT void HWRAPI(GetModeList) (vmode_t** pvidmodes, INT32 *numvidmodes)
 					{1280,1024},
 					{1600,1000},
 					{1680,1050},
+					{1920,1080},
 					{1920,1200},
+					{2560,1440},
 };
 
 	HDC bpphdc;
